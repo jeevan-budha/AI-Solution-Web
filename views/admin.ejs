@@ -423,7 +423,7 @@
 
 <body>
 
-  <!-- ===================== LOGIN PAGE ===================== -->
+  <!-- LOGIN PAGE  -->
   <div id="login-page" class="fixed inset-0 flex items-center justify-center z-50">
     <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 overflow-hidden">
       <!-- Header -->
@@ -470,10 +470,8 @@
     </div>
   </div>
 
-  <!-- ===================== TOAST ===================== -->
+ <!-- TOAST -->
   <div id="toast-container" class="fixed top-5 right-5 flex flex-col gap-3 pointer-events-none"></div>
-
-  <!-- ===================== CONFIRM MODAL ===================== -->
   <div id="confirm-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center">
     <div class="modal-backdrop absolute inset-0 bg-black/40" onclick="closeConfirm()"></div>
     <div class="modal-box relative bg-white rounded-2xl shadow-2xl p-7 w-full max-w-sm mx-4 text-center">
@@ -495,7 +493,6 @@
     </div>
   </div>
 
-  <!-- ===================== GENERIC MODAL ===================== -->
   <div id="generic-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center">
     <div class="modal-backdrop absolute inset-0 bg-black/40" onclick="closeModal()"></div>
     <div class="modal-box relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl mx-4 max-h-[90vh] flex flex-col">
@@ -513,13 +510,10 @@
     </div>
   </div>
 
-  <!-- ===================== SIDEBAR OVERLAY (mobile) ===================== -->
   <div id="sidebar-overlay" onclick="closeMobileSidebar()"></div>
 
-  <!-- ===================== APP SHELL ===================== -->
   <div id="app-shell" class="hidden flex h-screen overflow-hidden">
 
-    <!-- SIDEBAR -->
     <aside id="sidebar" class="w-64 flex-shrink-0 flex flex-col overflow-hidden" style="background:var(--secondary)">
       <!-- Logo -->
       <div class="sidebar-logo flex items-center gap-3 p-5 border-b border-white/10 h-16">
@@ -684,18 +678,12 @@
           <button onclick="navigateTo('profile')"
             class="w-9 h-9 rounded-xl flex items-center justify-center text-white text-sm font-bold"
             style="background:var(--primary)">A</button>
-          <!-- Logout -->
-          <!-- <button onclick="doLogout()" class="hidden sm:flex items-center gap-2 px-3 py-2 text-sm text-gray-600 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all font-medium">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
-          Logout
-        </button> -->
         </div>
       </header>
 
       <!-- CONTENT -->
       <main class="flex-1 overflow-y-auto p-4 md:p-6">
 
-        <!-- ========== DASHBOARD ========== -->
         <section id="sec-dashboard" class="page-section active">
           <!-- Stat Cards -->
           <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
@@ -875,7 +863,6 @@
           </div>
         </section>
 
-        <!-- ========== ENQUIRIES ========== -->
         <section id="sec-enquiries" class="page-section">
           <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
             <div class="p-5 border-b border-gray-100">
@@ -932,7 +919,7 @@
           </div>
         </section>
 
-        <!-- ========== SERVICES ========== -->
+
         <section id="sec-services" class="page-section">
           <div class="flex items-center justify-between mb-5">
             <div>
@@ -949,7 +936,6 @@
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="services-grid"></div>
         </section>
 
-        <!-- ========== BLOGS ========== -->
         <section id="sec-blogs" class="page-section">
           <div class="flex items-center justify-between mb-5">
             <div>
@@ -984,7 +970,7 @@
           </div>
         </section>
 
-        <!-- ========== GALLERY ========== -->
+
         <section id="sec-gallery" class="page-section">
           <div class="flex items-center justify-between mb-5">
             <div>
@@ -1002,7 +988,6 @@
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3" id="gallery-grid"></div>
         </section>
 
-        <!-- ========== EVENTS ========== -->
         <section id="sec-events" class="page-section">
           <div class="flex items-center justify-between mb-5">
             <div>
@@ -1019,7 +1004,7 @@
           <div class="space-y-4" id="events-list"></div>
         </section>
 
-        <!-- ========== REVIEWS ========== -->
+  
         <section id="sec-reviews" class="page-section">
           <div class="flex items-center justify-between mb-5">
             <div>
@@ -1036,7 +1021,7 @@
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="reviews-grid"></div>
         </section>
 
-        <!-- ========== SETTINGS ========== -->
+
         <section id="sec-settings" class="page-section">
           <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
             <!-- Tabs -->
@@ -1143,7 +1128,7 @@
           </div>
         </section>
 
-        <!-- ========== PROFILE ========== -->
+   
         <section id="sec-profile" class="page-section">
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <!-- Profile Card -->
