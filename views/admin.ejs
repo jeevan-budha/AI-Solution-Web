@@ -470,7 +470,7 @@
     </div>
   </div>
 
- <!-- TOAST -->
+  <!-- TOAST -->
   <div id="toast-container" class="fixed top-5 right-5 flex flex-col gap-3 pointer-events-none"></div>
   <div id="confirm-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center">
     <div class="modal-backdrop absolute inset-0 bg-black/40" onclick="closeConfirm()"></div>
@@ -481,16 +481,18 @@
             d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
         </svg>
       </div>
-      <h3 class="text-lg font-bold text-gray-800 mb-2">Confirm Delete</h3>
+      <h3 class="text-lg font-bold text-gray-800 mb-2" id="confirm-title">Confirm Delete</h3>
       <p class="text-sm text-gray-500 mb-6" id="confirm-text">Are you sure you want to delete this item? This action
         cannot be undone.</p>
       <div class="flex gap-3">
         <button onclick="closeConfirm()"
           class="flex-1 btn-ghost py-2 rounded-lg text-sm font-semibold transition-all">Cancel</button>
         <button onclick="executeConfirm()"
-          class="flex-1 btn-danger py-2 rounded-lg text-sm font-semibold transition-all">Delete</button>
+          class="flex-1 btn-danger py-2 rounded-lg text-sm font-semibold transition-all"
+          id="confirm-btn">Delete</button>
       </div>
     </div>
+  </div>
   </div>
 
   <div id="generic-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center">
@@ -1004,7 +1006,7 @@
           <div class="space-y-4" id="events-list"></div>
         </section>
 
-  
+
         <section id="sec-reviews" class="page-section">
           <div class="flex items-center justify-between mb-5">
             <div>
@@ -1128,7 +1130,7 @@
           </div>
         </section>
 
-   
+
         <section id="sec-profile" class="page-section">
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <!-- Profile Card -->
@@ -1324,7 +1326,7 @@
     let currentEnqPage = 1;
     const enqPerPage = 5;
     function visitWebsite() {
-      window.open('http://localhost:3000', '_blank');
+      window.open('https://ai-solution-web-yhke.onrender.com/admin', '_blank');
     }
     // =================== AUTH ===================
     const ADMIN_EMAIL = 'admin@ai-solutions.com';
@@ -1354,13 +1356,36 @@
     }
 
     function doLogout() {
-      showConfirm('Are you sure you want to logout?', () => {
+      document.getElementById('confirm-title').textContent = 'Confirm Logout';
+      document.getElementById('confirm-text').textContent = 'Are you sure you want to logout?';
+
+      const btn = document.getElementById('confirm-btn');
+      btn.textContent = 'Yes';
+      btn.className = 'flex-1 btn-primary py-2 rounded-lg text-sm font-semibold transition-all';
+
+      // Change icon to blue
+      const iconDiv = document.querySelector('#confirm-modal .w-14');
+      iconDiv.className = 'w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4';
+      const icon = iconDiv.querySelector('svg');
+      icon.className = 'w-7 h-7 text-blue-500';
+
+      document.getElementById('confirm-modal').classList.remove('hidden');
+      confirmCallback = () => {
         document.getElementById('app-shell').classList.add('hidden');
         document.getElementById('login-page').style.display = 'flex';
         showToast('Logged out successfully', 'info');
-      });
+      };
     }
 
+    function resetConfirmModalToDelete() {
+      const iconDiv = document.querySelector('#confirm-modal .w-14');
+      iconDiv.className = 'w-14 h-14 rounded-full bg-red-100 flex items-center justify-center mx-auto mb-4';
+      const icon = iconDiv.querySelector('svg');
+      icon.className = 'w-7 h-7 text-red-500';
+      document.getElementById('confirm-title').textContent = 'Confirm Delete';
+      const btn = document.getElementById('confirm-btn');
+      btn.className = 'flex-1 btn-danger py-2 rounded-lg text-sm font-semibold transition-all';
+    }
     function toggleLoginPass() {
       const input = document.getElementById('login-password');
       input.type = input.type === 'password' ? 'text' : 'password';
@@ -1407,6 +1432,7 @@
 
     // =================== CONFIRM MODAL ===================
     function showConfirm(text, cb) {
+      resetConfirmModalToDelete(); // Reset to delete state first
       document.getElementById('confirm-text').textContent = text;
       document.getElementById('confirm-modal').classList.remove('hidden');
       confirmCallback = cb;
@@ -1583,7 +1609,7 @@
         DB.enquiries = DB.enquiries.filter(e => e.id !== id);
         renderEnquiries(); renderRecentEnquiries();
         showToast('Enquiry deleted', 'success');
-      });
+      }, 'Confirm Delete', 'Delete', true);
     }
 
     function exportCSV() {
@@ -1703,7 +1729,7 @@
       showConfirm('Delete this service?', () => {
         DB.services = DB.services.filter(s => s.id !== id);
         renderServices(); showToast('Service deleted', 'success');
-      });
+      }, 'Confirm Delete', 'Delete', true);
     }
 
     // =================== BLOGS ===================
@@ -1785,7 +1811,7 @@
     }
 
     function deleteBlog(id) {
-      showConfirm('Delete this blog post?', () => { DB.blogs = DB.blogs.filter(b => b.id !== id); renderBlogs(); showToast('Blog deleted', 'success'); });
+      showConfirm('Delete this blog post?', () => { DB.blogs = DB.blogs.filter(b => b.id !== id); renderBlogs(); showToast('Blog deleted', 'success'); }, 'Confirm Delete', 'Delete', true);
     }
 
     // =================== GALLERY ===================
@@ -1867,7 +1893,7 @@
     }
 
     function deleteGallery(id) {
-      showConfirm('Delete this image?', () => { DB.gallery = DB.gallery.filter(g => g.id !== id); renderGallery(); showToast('Image deleted', 'success'); });
+      showConfirm('Delete this image?', () => { DB.gallery = DB.gallery.filter(g => g.id !== id); renderGallery(); showToast('Image deleted', 'success'); }, 'Confirm Delete', 'Delete', true);
     }
 
     // =================== EVENTS ===================
@@ -1944,7 +1970,7 @@
     }
 
     function deleteEvent(id) {
-      showConfirm('Delete this event?', () => { DB.events = DB.events.filter(e => e.id !== id); renderEvents(); showToast('Event deleted', 'success'); });
+      showConfirm('Delete this event?', () => { DB.events = DB.events.filter(e => e.id !== id); renderEvents(); showToast('Event deleted', 'success'); }, 'Confirm Delete', 'Delete', true);
     }
 
     // =================== REVIEWS ===================
@@ -2042,7 +2068,7 @@
     }
 
     function deleteReview(id) {
-      showConfirm('Delete this review?', () => { DB.reviews = DB.reviews.filter(r => r.id !== id); renderReviews(); renderRecentReviews(); showToast('Review deleted', 'success'); });
+      showConfirm('Delete this review?', () => { DB.reviews = DB.reviews.filter(r => r.id !== id); renderReviews(); renderRecentReviews(); showToast('Review deleted', 'success'); }, 'Confirm Delete', 'Delete', true);
     }
 
     // =================== SETTINGS ===================
